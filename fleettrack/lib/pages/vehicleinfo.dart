@@ -154,6 +154,29 @@ class _VehicleInfoState extends State<VehicleInfo> {
                 ],
               ),
             ),
+            Container(
+                width: MediaQuery.of(context).size.width * 0.95,
+                height: MediaQuery.of(context).size.height * 0.1,
+                margin: EdgeInsets.symmetric(vertical: 10),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(width: 2),
+                    borderRadius: BorderRadius.circular(20)),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        'EMI',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 22),
+                      ),
+                      Container(
+                        child: CircularProgressIndicator(
+                          color: Colors.black,
+                          value: 0.3,
+                        ),
+                      )
+                    ])),
             Row(
               children: [
                 Expanded(
