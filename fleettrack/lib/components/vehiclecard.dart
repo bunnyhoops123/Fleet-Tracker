@@ -1,6 +1,8 @@
 import 'package:fleettrack/models/vehicelclass.dart';
+import 'package:fleettrack/pages/vehicleinfo.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/src/intl/date_format.dart';
 
 class VehicleCard extends StatelessWidget {
   final Vehicle vehicle;
@@ -35,18 +37,19 @@ class VehicleCard extends StatelessWidget {
                     height: 7,
                   ),
                   Container(
-                      padding: const EdgeInsets.only(left: 30),
+                      padding: const EdgeInsets.only(left: 10),
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        vehicle.model,
+                        vehicle.model.toUpperCase(),
                         style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w400),
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       )),
                 ],
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
-                child: Text('2019'),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child:
+                    Text(DateFormat().add_yM().format(vehicle.purchaseYear!)),
               )
             ],
           ),
@@ -54,36 +57,53 @@ class VehicleCard extends StatelessWidget {
             color: Colors.transparent,
             child: Image.asset(vehicle.imagePath),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              const Text('Fuel Economy:20Kmpl'),
-              Text('Odometer: ${vehicle.odometer} Km')
-            ],
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            margin: const EdgeInsets.symmetric(vertical: 5),
-            width: MediaQuery.of(context).size.width * 0.4,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(width: 1),
-                borderRadius: BorderRadius.circular(20)),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'View More',
-                  style: GoogleFonts.dmSerifDisplay(fontSize: 15),
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-                const Icon(Icons.arrow_forward)
-              ],
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //   children: [
+          //     const Text('Fuel Economy:20Kmpl'),
+          //     Text('Odometer: ${vehicle.odometer} Km')
+          //   ],
+          // ),
+          // const SizedBox(
+          //   height: 10,
+          // ),
+          GestureDetector(
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return Center(
+                        child: CircularProgressIndicator(
+                      color: Colors.black,
+                    ));
+                  });
+              Future.delayed(Duration(milliseconds: 200), () {
+                Navigator.pop(context);
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => VehicleInfo(vehicle: vehicle)));
+              });
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              margin: const EdgeInsets.symmetric(vertical: 0),
+              width: MediaQuery.of(context).size.width * 0.4,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(width: 1),
+                  borderRadius: BorderRadius.circular(20)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'View More',
+                    style: GoogleFonts.dmSerifDisplay(fontSize: 15),
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  const Icon(Icons.arrow_forward)
+                ],
+              ),
             ),
           )
         ],

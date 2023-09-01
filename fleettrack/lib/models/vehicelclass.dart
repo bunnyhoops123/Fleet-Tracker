@@ -1,7 +1,7 @@
 class Vehicle {
   final String manufacturer;
   final String model;
-  final int purchaseYear;
+  final DateTime? purchaseYear;
   final String imagePath = 'assets/car_images/model3.png';
   final String odometer;
   Vehicle(
