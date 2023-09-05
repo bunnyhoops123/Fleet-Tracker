@@ -203,7 +203,7 @@ class _AddVehicleState extends State<AddVehicle> {
                         manufacturer: _manufacturerController.text,
                         model: _modelController.text,
                         purchaseYear: _dateSelected,
-                        odometer: _odometerController.text));
+                        odometer: int.parse(_odometerController.text)));
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(builder: (context) => HomePage()),

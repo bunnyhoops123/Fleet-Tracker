@@ -4,6 +4,7 @@ import 'package:fleettrack/models/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -13,6 +14,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _vehicleBox = Hive.box('vehicleBox');
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _vehicleBox.get('TODOLIST');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Obx(

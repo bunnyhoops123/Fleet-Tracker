@@ -4,8 +4,14 @@ import 'package:fleettrack/pages/intropage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:month_year_picker/month_year_picker.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
+void main() async {
+  //init the hive
+  await Hive.initFlutter();
+
+  //open a box
+  var box = await Hive.openBox('fleetBox');
   runApp(const MyApp());
 }
 
